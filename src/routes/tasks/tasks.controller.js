@@ -3,6 +3,8 @@ const {
   getFullTaskByFilter,
   getTaskSummaryByFilter,
   postNewTask,
+  updateTask,
+  deleteTask,
 } = require("../../models/tasks.model");
 
 async function httpGetTaskSummary(req, res) {
@@ -46,20 +48,47 @@ async function httpPostNewTask(req, res) {
   try {
     task = await postNewTask(data);
   } catch (err) {
-    console.error(e);
-    return res.status(400).json(errorParser(e));
+    console.error(err);
+    return res.status(400).json(errorParser(err));
   }
 
   res.status(201).json(task);
 }
 
-function httpUpdateTask(req, res) {
-  const task = req.boy;
+async function httpUpdateTask(req, res) {
+  const data = req.body;
 
-  //TODO
+  const filter = { ...req.params, value: req.query.filterValue };
+
+  let task;
+  try {
+    task = await updateTask(data, filter);
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json(errorParser(err));
+  }
+
+  res.status(200).json(task);
 }
 
-function httpDeleteTask(req, res) {
-  //TODO
+async function httpDeleteTask(req, res) {
+  const filter = { ...req.params, value: req.query.filterValue };
+
+  let task;
+  try {
+    task = await deleteTask(filter);
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json(errorParser(err));
+  }
+
+  res.status(200).json(task);
 }
-module.exports = { httpGetTaskSummary, httpGetFullTask, httpPostNewTask };
+
+module.exports = {
+  httpGetTaskSummary,
+  httpGetFullTask,
+  httpPostNewTask,
+  httpUpdateTask,
+  httpDeleteTask,
+};
