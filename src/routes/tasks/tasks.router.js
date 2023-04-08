@@ -1,8 +1,14 @@
 const express = require("express");
-const { httpGetTaskSummary } = require("./tasks.controller");
+const {
+  httpGetTaskSummary,
+  httpGetFullTask,
+  httpPostNewTask,
+} = require("./tasks.controller");
 
 const tasksRouter = express.Router();
 
-tasksRouter.get("/summary/:taskId", httpGetTaskSummary);
+tasksRouter.get("/summary/:filter", httpGetTaskSummary);
+tasksRouter.get("/full/:filter", httpGetFullTask);
+tasksRouter.post("/new", httpPostNewTask);
 
 module.exports = tasksRouter;
