@@ -34,6 +34,8 @@ function createDeleteQuery({ filter, value }) {
   return `DELETE FROM tasks WHERE ${filter}=${value}`;
 }
 
+function checkifEmptyBody(params) {}
+
 module.exports = {
   checkIfEmptyResult,
   createGetQuery,
