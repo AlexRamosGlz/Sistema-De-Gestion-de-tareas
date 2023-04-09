@@ -22,8 +22,6 @@ async function postNewUser({ username, password }) {
 
   if (checkIfEmptyResult(result)) throw new Error("Query throw 0 results");
 
-  console.log(token);
-
   return token;
 }
 

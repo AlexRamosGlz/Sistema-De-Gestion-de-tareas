@@ -4,7 +4,6 @@ function checkIfEmptyResult(result) {
 }
 
 function createGetQuery(fullRow, username, id, columns = [""]) {
-  console.log(fullRow, username, id, "data");
   if (fullRow)
     return `SELECT * FROM tasks WHERE username="${username}" AND taskID="${id}"`;
 

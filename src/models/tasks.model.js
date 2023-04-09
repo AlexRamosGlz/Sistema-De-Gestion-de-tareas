@@ -10,7 +10,7 @@ const {
 
 async function getFullTask(username, id) {
   const query = createGetQuery(true, username, id);
-  console.log(query);
+
   const result = await (await dbConnection()).execute(query);
 
   if (checkIfEmptyResult(result)) throw new Error("Query throw 0 results");
@@ -30,7 +30,7 @@ async function getTaskSummary(username, id, columns) {
 
 async function postNewTask(task) {
   const query = createPostQuery(task);
-  console.log(query);
+
   const result = await (await dbConnection()).execute(query);
 
   if (checkIfEmptyResult(result)) throw new Error("Query throw 0 results");
@@ -39,7 +39,6 @@ async function postNewTask(task) {
 }
 
 async function updateTask(task, username, id) {
-  console.log(task, username, id);
   const query = createPutQuery(task, username, id);
 
   try {

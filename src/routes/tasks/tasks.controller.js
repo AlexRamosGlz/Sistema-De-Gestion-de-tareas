@@ -45,7 +45,6 @@ async function httpGetFullTask(req, res) {
 async function httpPostNewTask(req, res) {
   const data = { ...req.body, username: req.username };
 
-  console.log(data);
   let task;
   try {
     task = await postNewTask(data);
@@ -61,7 +60,6 @@ async function httpUpdateTask(req, res) {
   const data = req.body;
   const { id } = req.params;
   const username = req.username;
-  console.log(req.username);
 
   try {
     await updateTask(data, username, id);
