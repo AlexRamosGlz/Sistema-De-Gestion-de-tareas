@@ -1,7 +1,7 @@
 const errorParser = require("../../helpers/errorParser");
 const {
-  getFullTaskByFilter,
-  getTaskSummaryByFilter,
+  getFullTask,
+  getTaskSummary,
   postNewTask,
   updateTask,
   deleteTask,
@@ -9,14 +9,14 @@ const {
 
 async function httpGetTaskSummary(req, res) {
   //TODO
-
-  const filter = { ...req.params, value: req.query.filterValue };
+  const { id } = req.params;
   const columns = req.query.columns.split(",");
+  const username = req.username;
 
   let task;
 
   try {
-    task = await getTaskSummaryByFilter({ ...filter }, columns);
+    task = await getTaskSummary(username, id, columns);
   } catch (e) {
     console.error(e);
     return res.status(400).json(errorParser(e));
@@ -27,12 +27,13 @@ async function httpGetTaskSummary(req, res) {
 
 async function httpGetFullTask(req, res) {
   //TODO
-  const filter = { ...req.params, value: req.query.filterValue };
 
+  const username = req.username;
+  const { id } = req.params;
   let task;
 
   try {
-    task = await getFullTaskByFilter({ ...filter });
+    task = await getFullTask(username, id);
   } catch (e) {
     console.error(e);
     return res.status(400).json(errorParser(e));
@@ -42,8 +43,9 @@ async function httpGetFullTask(req, res) {
 }
 
 async function httpPostNewTask(req, res) {
-  const data = req.body;
+  const data = { ...req.body, username: req.username };
 
+  console.log(data);
   let task;
   try {
     task = await postNewTask(data);
@@ -57,32 +59,32 @@ async function httpPostNewTask(req, res) {
 
 async function httpUpdateTask(req, res) {
   const data = req.body;
+  const { id } = req.params;
+  const username = req.username;
+  console.log(req.username);
 
-  const filter = { ...req.params, value: req.query.filterValue };
-
-  let task;
   try {
-    task = await updateTask(data, filter);
+    await updateTask(data, username, id);
   } catch (err) {
     console.error(err);
     return res.status(400).json(errorParser(err));
   }
 
-  res.status(200).json(task);
+  res.status(200).json({ succes: true });
 }
 
 async function httpDeleteTask(req, res) {
-  const filter = { ...req.params, value: req.query.filterValue };
+  const { id } = req.params;
+  const username = req.username;
 
-  let task;
   try {
-    task = await deleteTask(filter);
+    await deleteTask(username, id);
   } catch (err) {
     console.error(err);
     return res.status(400).json(errorParser(err));
   }
 
-  res.status(200).json(task);
+  res.status(200).json({ succes: true });
 }
 
 module.exports = {

@@ -15,13 +15,12 @@ async function postNewUser({ username, password }) {
 
   const query = createPostUserQuery(user);
 
-  const result = await (await dbConnection()).execute(query);
-
-  if (checkIfEmptyResult(result)) throw new Error("Query throw 0 results");
-
   const token = jwt.sign({ username }, process.env.TOKEN_SECRET, {
     expiresIn: 604800000,
   });
+  const result = await (await dbConnection()).execute(query);
+
+  if (checkIfEmptyResult(result)) throw new Error("Query throw 0 results");
 
   console.log(token);
 

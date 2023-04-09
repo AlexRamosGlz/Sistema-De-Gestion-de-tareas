@@ -3,12 +3,14 @@ function checkIfEmptyResult(result) {
   return false;
 }
 
-function createGetQuery(fullRow, filters, columns = [""]) {
-  const { filter, value } = filters;
+function createGetQuery(fullRow, username, id, columns = [""]) {
+  console.log(fullRow, username, id, "data");
+  if (fullRow)
+    return `SELECT * FROM tasks WHERE username="${username}" AND taskID="${id}"`;
 
-  if (fullRow) return `SELECT * FROM tasks WHERE ${filter}="${value}"`;
-
-  return `SELECT ${columns.join(",")} FROM tasks WHERE ${filter}="${value}"`;
+  return `SELECT ${columns.join(
+    ","
+  )} FROM tasks WHERE username="${username}" AND taskID="${id}"`;
 }
 
 function createPostQuery(task) {
@@ -20,18 +22,20 @@ function createPostQuery(task) {
   )})`;
 }
 
-function createPutQuery(task, { filter, value }) {
+function createPutQuery(task, username, id) {
   const query = [];
 
   for (const [key, value] of Object.entries(task)) {
     query.push(`${key}='${value}'`);
   }
 
-  return `UPDATE tasks SET ${query.join(",")} WHERE ${filter}=${value}`;
+  return `UPDATE tasks SET ${query.join(
+    ","
+  )} WHERE taskID="${id}" AND username="${username}"`;
 }
 
-function createDeleteQuery({ filter, value }) {
-  return `DELETE FROM tasks WHERE ${filter}=${value}`;
+function createDeleteQuery(username, id) {
+  return `DELETE FROM tasks WHERE taskID=${id} AND username="${username}"`;
 }
 
 function checkifEmptyBody(params) {}

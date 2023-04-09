@@ -8,9 +8,9 @@ const {
   createDeleteQuery,
 } = require("../routes/tasks/tasks.middleware");
 
-async function getFullTaskByFilter(filters) {
-  const query = createGetQuery(true, filters);
-
+async function getFullTask(username, id) {
+  const query = createGetQuery(true, username, id);
+  console.log(query);
   const result = await (await dbConnection()).execute(query);
 
   if (checkIfEmptyResult(result)) throw new Error("Query throw 0 results");
@@ -18,8 +18,8 @@ async function getFullTaskByFilter(filters) {
   return result[0];
 }
 
-async function getTaskSummaryByFilter(filters, columns) {
-  const query = createGetQuery(false, filters, columns);
+async function getTaskSummary(username, id, columns) {
+  const query = createGetQuery(false, username, id, columns);
 
   const result = await (await dbConnection()).execute(query);
 
@@ -30,7 +30,7 @@ async function getTaskSummaryByFilter(filters, columns) {
 
 async function postNewTask(task) {
   const query = createPostQuery(task);
-
+  console.log(query);
   const result = await (await dbConnection()).execute(query);
 
   if (checkIfEmptyResult(result)) throw new Error("Query throw 0 results");
@@ -38,13 +38,14 @@ async function postNewTask(task) {
   return task;
 }
 
-async function updateTask(task, filter) {
-  const query = createPutQuery(task, filter);
+async function updateTask(task, username, id) {
+  console.log(task, username, id);
+  const query = createPutQuery(task, username, id);
 
   try {
-    await getFullTaskByFilter(filter);
+    await getFullTask(username, id);
   } catch (err) {
-    throw new Error("No task found with given filter");
+    throw new Error("No task found");
   }
 
   const result = await (await dbConnection()).execute(query);
@@ -54,11 +55,11 @@ async function updateTask(task, filter) {
   return task;
 }
 
-async function deleteTask(filter) {
-  const query = createDeleteQuery(filter);
+async function deleteTask(username, id) {
+  const query = createDeleteQuery(username, id);
 
   try {
-    await getFullTaskByFilter(filter);
+    await getFullTask(username, id);
   } catch (err) {
     throw new Error("No task found with given filter");
   }
@@ -71,8 +72,8 @@ async function deleteTask(filter) {
 }
 
 module.exports = {
-  getFullTaskByFilter,
-  getTaskSummaryByFilter,
+  getFullTask,
+  getTaskSummary,
   postNewTask,
   updateTask,
   deleteTask,
