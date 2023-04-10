@@ -1,8 +1,6 @@
-
 # Sistema de Gestion de Usuarios
 
 This is a small API for task managment
-
 
 ## API Reference
 
@@ -16,15 +14,15 @@ This is a small API for task managment
 
 Body:
 
-| username | password    
-| :-------- | :------- |
-| `string` **Required**     | **Required** `string` | 
+| username              | password              |
+| :-------------------- | :-------------------- |
+| `string` **Required** | **Required** `string` |
 
-Return: 
+Return:
 
-| token | 
-| :-------- | 
-| `jsonwebtoken`      | 
+| token          |
+| :------------- |
+| `jsonwebtoken` |
 
 ## Tasks
 
@@ -36,16 +34,15 @@ Return:
   GET /tasks/full/${id}
 ```
 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `id`      | `int`    | **Required**. Id of item to fetch |
+| Parameter | Type  | Description                       |
+| :-------- | :---- | :-------------------------------- |
+| `id`      | `int` | **Required**. Id of item to fetch |
 
-Returns: 
+Returns:
 
-| taskID | titulo      | descripcion | terminado | fechaDeEntrega | comentarios | responsable| tags | username |
-| :-------- | :------- | :----------|----| --- |    ---- | --- | --- | -- |
-| `int`      | `string`|  `string` |`boolean`| `date` **`YYYY-MM-DD`** | `string` | `string` | `string` | `string`
-
+| taskID | titulo   | descripcion | terminado | fechaDeEntrega          | comentarios | responsable | tags     | username |
+| :----- | :------- | :---------- | --------- | ----------------------- | ----------- | ----------- | -------- | -------- |
+| `int`  | `string` | `string`    | `boolean` | `date` **`YYYY-MM-DD`** | `string`    | `string`    | `string` | `string` |
 
 #### Get a task summary
 
@@ -53,36 +50,37 @@ Returns:
   GET /tasks/summar/${id}?columns=${columns}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter | Type  | Description                       |
+| :-------- | :---- | :-------------------------------- |
 | `id`      | `int` | **Required**. Id of item to fetch |
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `columns`      | `task_column` | **Optional**. columns of the table to return (if empty; titulo, descripcion wll be return) |
+| Parameter | Type          | Description                                                                                |
+| :-------- | :------------ | :----------------------------------------------------------------------------------------- |
+| `columns` | `task_column` | **Optional**. columns of the table to return (if empty; titulo, descripcion wll be return) |
 
 Returns:
 
-| column | 
-| :-------- | 
-| `task_column`      | 
+| column        |
+| :------------ |
+| `task_column` |
 
 #### Post a new task
 
 ```http
   POST /tasks/new/
 ```
+
 body:
 
-| titulo      | descripcion | terminado | fechaDeEntrega | comentarios | responsable| tags | 
- :------- | :----------|----| --- |    ---- | --- | --- |
-| `string`|  `string` |`boolean`| `date` **`YYYY-MM-DD`** |**Optional** `string` | **Optional**`string` | **Optional**`string` | 
+| titulo   | descripcion | terminado | fechaDeEntrega          | comentarios           | responsable          | tags                 |
+| :------- | :---------- | --------- | ----------------------- | --------------------- | -------------------- | -------------------- |
+| `string` | `string`    | `boolean` | `date` **`YYYY-MM-DD`** | **Optional** `string` | **Optional**`string` | **Optional**`string` |
 
-Returns: 
+Returns:
 
-| titulo      | descripcion | terminado | fechaDeEntrega | comentarios | responsable| tags | username |
-| :------- | :----------|----| --- |    ---- | --- | --- | -- |
-  | `string`|  `string` |`boolean`| `date` **`YYYY-MM-DD`** | `string` | `string` | `string` | `string`
+| titulo   | descripcion | terminado | fechaDeEntrega          | comentarios | responsable | tags     | username |
+| :------- | :---------- | --------- | ----------------------- | ----------- | ----------- | -------- | -------- |
+| `string` | `string`    | `boolean` | `date` **`YYYY-MM-DD`** | `string`    | `string`    | `string` | `string` |
 
 #### Update a task
 
@@ -90,21 +88,21 @@ Returns:
   PUT /tasks/update/${id}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter | Type  | Description                        |
+| :-------- | :---- | :--------------------------------- |
 | `id`      | `int` | **Required**. Id of item to update |
 
 Body:
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `columns`      | `task_column` | **Required**. columns to update |
+| Parameter | Type          | Description                     |
+| :-------- | :------------ | :------------------------------ |
+| `columns` | `task_column` | **Required**. columns to update |
 
 Returns:
 
-| succes | 
-| :-------- | 
-| `boolean`      | 
+| succes    |
+| :-------- |
+| `boolean` |
 
 #### Delete a task
 
@@ -112,43 +110,23 @@ Returns:
   DELETE /tasks/delete/${id}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter | Type  | Description                        |
+| :-------- | :---- | :--------------------------------- |
 | `id`      | `int` | **Required**. Id of item to delete |
 
 Returns:
 
-| succes | 
-| :-------- | 
-| `boolean`      | 
-
-
-
-
-
-
-
-
-
-
-
+| succes    |
+| :-------- |
+| `boolean` |
 
 ## Scrips
 
 **Don't forget to install it's dependencies**
 
+Development
 
-Development 
-
-    npm start 
-
-
-Production
-
-    npm run mode 
-
-
-
+    npm start
 
 ## Running Tests
 
@@ -158,8 +136,6 @@ To run tests, run the following command
   npm run test
 ```
 
-
 ## Authors
 
 - [@AlexRamosGlz](https://github.com/AlexRamosGlz)
-
