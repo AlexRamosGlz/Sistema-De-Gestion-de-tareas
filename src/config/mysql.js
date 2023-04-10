@@ -15,8 +15,8 @@ async function dbConnection(database) {
   return con;
 }
 
-async function connection() {
-  return await dbConnection();
+async function execute(query) {
+  return await (await dbConnection()).execute(query);
 }
 
-module.exports = connection;
+module.exports = execute;
