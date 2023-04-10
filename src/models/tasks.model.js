@@ -1,4 +1,4 @@
-const dbConnection = require("../config/mysql");
+const connection = require("../config/mysql");
 
 const {
   createGetQuery,
@@ -11,7 +11,7 @@ const {
 async function getFullTask(username, id) {
   const query = createGetQuery(true, username, id);
 
-  const result = await (await dbConnection()).execute(query);
+  const result = await (await connection()).execute(query);
 
   if (checkIfEmptyResult(result)) throw new Error("Query throw 0 results");
 
@@ -21,7 +21,7 @@ async function getFullTask(username, id) {
 async function getTaskSummary(username, id, columns) {
   const query = createGetQuery(false, username, id, columns);
 
-  const result = await (await dbConnection()).execute(query);
+  const result = await (await connection()).execute(query);
 
   if (checkIfEmptyResult(result)) throw new Error("Query throw 0 results");
 
@@ -31,7 +31,7 @@ async function getTaskSummary(username, id, columns) {
 async function postNewTask(task) {
   const query = createPostQuery(task);
 
-  const result = await (await dbConnection()).execute(query);
+  const result = await (await connection()).execute(query);
 
   if (checkIfEmptyResult(result)) throw new Error("Query throw 0 results");
 
@@ -47,7 +47,7 @@ async function updateTask(task, username, id) {
     throw new Error("No task found");
   }
 
-  const result = await (await dbConnection()).execute(query);
+  const result = await (await connection()).execute(query);
 
   if (checkIfEmptyResult(result)) throw new Error("Query throw 0 results");
 
@@ -63,7 +63,7 @@ async function deleteTask(username, id) {
     throw new Error("No task found with given filter");
   }
 
-  const result = await (await dbConnection()).execute(query);
+  const result = await (await connection()).execute(query);
 
   if (checkIfEmptyResult(result)) throw new Error("Query throw 0 results");
 
