@@ -9,7 +9,7 @@ function createGetQuery(fullRow, username, id, columns = [""]) {
 
   return `SELECT ${columns.join(
     ","
-  )} FROM tasks WHERE username="${username}" AND taskID="${id}"`;
+  )},taskID FROM tasks WHERE username="${username}"`;
 }
 
 function createPostQuery(task) {

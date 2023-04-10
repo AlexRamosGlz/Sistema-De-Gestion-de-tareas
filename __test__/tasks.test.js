@@ -111,7 +111,7 @@ describe("tasks API", () => {
   describe("Test GET /tasks/summary (GET succesful)", () => {
     test("it should return 200 succes", async () => {
       const response = await request(app)
-        .get("/tasks/summary/1")
+        .get("/tasks/summary/")
         .query({ columns: "titulo,descripcion" })
         .set("Authorization", `Bearer ${testToken}`)
         .expect("Content-Type", /json/)
@@ -124,9 +124,9 @@ describe("tasks API", () => {
   describe("Test GET /tasks/summary", () => {
     test("it should return 400 bad request (bad id)", async () => {
       const response = await request(app)
-        .get("/tasks/summary/asd")
+        .get("/tasks/summary/")
         .query({ columns: "titulo,descripcion" })
-        .set("Authorization", `Bearer ${testToken}`)
+
         .expect("Content-Type", /json/)
         .expect(400);
 

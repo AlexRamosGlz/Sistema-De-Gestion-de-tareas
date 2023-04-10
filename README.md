@@ -40,6 +40,10 @@ Return:
 | :-------- | :---- | :-------------------------------- |
 | `id`      | `int` | **Required**. Id of item to fetch |
 
+| Header  | Type           | Description                                |
+| :------ | :------------- | :----------------------------------------- |
+| `token` | `jsonwebtoken` | **Required**. token needed to fetch result |
+
 Returns:
 
 | taskID | titulo   | descripcion | terminado | fechaDeEntrega          | comentarios | responsable | tags     | username |
@@ -49,16 +53,16 @@ Returns:
 #### Get a task summary
 
 ```http
-  GET /tasks/summar/${id}?columns=${columns}
+  GET /tasks/summar/?columns=${columns}
 ```
 
-| Parameter | Type  | Description                       |
-| :-------- | :---- | :-------------------------------- |
-| `id`      | `int` | **Required**. Id of item to fetch |
-
-| Parameter | Type          | Description                                                                                |
+| query     | Type          | Description                                                                                |
 | :-------- | :------------ | :----------------------------------------------------------------------------------------- |
 | `columns` | `task_column` | **Optional**. columns of the table to return (if empty; titulo, descripcion wll be return) |
+
+| Header  | Type           | Description                                |
+| :------ | :------------- | :----------------------------------------- |
+| `token` | `jsonwebtoken` | **Required**. token needed to fetch result |
 
 Returns:
 
@@ -78,6 +82,10 @@ body:
 | :------- | :---------- | --------- | ----------------------- | --------------------- | -------------------- | -------------------- |
 | `string` | `string`    | `boolean` | `date` **`YYYY-MM-DD`** | **Optional** `string` | **Optional**`string` | **Optional**`string` |
 
+| Header  | Type           | Description                                |
+| :------ | :------------- | :----------------------------------------- |
+| `token` | `jsonwebtoken` | **Required**. token needed to fetch result |
+
 Returns:
 
 | titulo   | descripcion | terminado | fechaDeEntrega          | comentarios | responsable | tags     | username |
@@ -93,6 +101,10 @@ Returns:
 | Parameter | Type  | Description                        |
 | :-------- | :---- | :--------------------------------- |
 | `id`      | `int` | **Required**. Id of item to update |
+
+| Header  | Type           | Description                                |
+| :------ | :------------- | :----------------------------------------- |
+| `token` | `jsonwebtoken` | **Required**. token needed to fetch result |
 
 Body:
 
@@ -115,6 +127,10 @@ Returns:
 | Parameter | Type  | Description                        |
 | :-------- | :---- | :--------------------------------- |
 | `id`      | `int` | **Required**. Id of item to delete |
+
+| Header  | Type           | Description                                |
+| :------ | :------------- | :----------------------------------------- |
+| `token` | `jsonwebtoken` | **Required**. token needed to fetch result |
 
 Returns:
 

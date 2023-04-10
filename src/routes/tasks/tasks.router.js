@@ -11,7 +11,7 @@ const checkIfBodyIsCorrect = require("../../middleware/checkIfBodyIsCorrect");
 
 const tasksRouter = express.Router();
 
-tasksRouter.get("/summary/:id", isAuthorize, httpGetTaskSummary);
+tasksRouter.get("/summary/", isAuthorize, httpGetTaskSummary);
 tasksRouter.get("/full/:id", isAuthorize, httpGetFullTask);
 tasksRouter.post("/new", isAuthorize, checkIfBodyIsCorrect, httpPostNewTask);
 tasksRouter.put(
