@@ -1,4 +1,4 @@
-const execute = require("../config/mysql");
+const { execute } = require("../config/mysql");
 const {
   createGetQuery,
   checkIfEmptyResult,

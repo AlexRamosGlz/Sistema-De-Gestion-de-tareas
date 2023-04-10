@@ -4,7 +4,7 @@ const errorParser = require("../helpers/errorParser");
 function isAuthorize(req, res, next) {
   const token = req.headers.authorization.split(" ")[1];
 
-  let match = "";
+  let match;
   try {
     match = jwt.verify(token, process.env.TOKEN_SECRET);
   } catch (error) {

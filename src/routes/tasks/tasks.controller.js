@@ -27,7 +27,7 @@ async function httpGetTaskSummary(req, res) {
 
 async function httpGetFullTask(req, res) {
   //TODO
-
+  console.log(req.params, "params");
   const username = req.username;
   const { id } = req.params;
   let task;

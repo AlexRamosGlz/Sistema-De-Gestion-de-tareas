@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const connection = require("../config/mysql");
+const { execute } = require("../config/mysql");
 const { checkIfEmptyResult } = require("../routes/tasks/tasks.middleware");
 const { createPostUserQuery } = require("../routes/users/user.middleware");
 
@@ -18,7 +18,7 @@ async function postNewUser({ username, password }) {
   const token = jwt.sign({ username }, process.env.TOKEN_SECRET, {
     expiresIn: 604800000,
   });
-  const result = await (await connection()).execute(query);
+  const result = await execute(query);
 
   if (checkIfEmptyResult(result)) throw new Error("Query throw 0 results");
 
